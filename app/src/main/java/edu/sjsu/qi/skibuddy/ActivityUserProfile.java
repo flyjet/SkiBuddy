@@ -9,7 +9,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 public class ActivityUserProfile extends Activity {
@@ -17,18 +20,14 @@ public class ActivityUserProfile extends Activity {
     private static final String TAG = ActivityUserProfile.class.getSimpleName();
 
     ImageButton ibBack;
+    Button btSignout;
+    ItemUser queryResult = new ItemUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_user_profile);
-
-
-        //TODO: implement query user profile from facebook account and list here
-
-
-
 
         // Set up the action bar
         ActionBar actionBar = getActionBar();
@@ -56,6 +55,33 @@ public class ActivityUserProfile extends Activity {
         });
 
 
+        //Signout button action
+        btSignout = (Button) findViewById(R.id.button_SignOut);
+        btSignout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //TODO: Implement SignOut with Facebook account
+
+                //return back to main activity
+                try{
+                    Intent intent = new Intent(ActivityUserProfile.this, MainActivity.class);
+                    startActivity(intent);
+                }catch(Exception e){
+                    Log.e(TAG, e.toString());
+                }
+            }
+        });
+
+
+        //TODO: implement query user profile from facebook account and list here
+        //The follow is hard code for example
+        queryResult.setName("Qi Cao");
+        queryResult.setThumbnailName("qi_thumbnail");
+        queryResult.setTagline("Don't cry because it's over, smile because it happened.");
+
+        updateUserProfile();
+
     }
 
     @Override
@@ -72,11 +98,18 @@ public class ActivityUserProfile extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private void updateUserProfile(){
+        ImageView thumbnail = (ImageView) findViewById(R.id.user_thumbnail);
+        TextView name = (TextView) findViewById(R.id.user_name);
+        TextView tagline = (TextView) findViewById(R.id.user_Tagline);
+
+        //thumbnail.setImage??
+        name.setText(queryResult.getName());
+        tagline.setText(queryResult.getTagline());
+
     }
 }
