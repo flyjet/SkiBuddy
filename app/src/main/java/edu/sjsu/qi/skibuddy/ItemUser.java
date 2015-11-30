@@ -1,13 +1,23 @@
 package edu.sjsu.qi.skibuddy;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+
 /**
  * Created by qi on 11/20/15.
  */
 public class ItemUser {
     private String userId;
     private String userName;
-    private String thumbnailName;
-    private String Tagline;
+    private String thumbnailURL;
 
     public String getUserId() {
         return userId;
@@ -17,12 +27,8 @@ public class ItemUser {
         return userName;
     }
 
-    public String getTagline() {
-        return Tagline;
-    }
-
-    public String getThumbnailName() {
-        return thumbnailName;
+    public String getThumbnailURL() {
+        return thumbnailURL;
     }
 
     public void setUserId(String userId) {
@@ -33,11 +39,28 @@ public class ItemUser {
         this.userName = name;
     }
 
-    public void setThumbnailName(String thumbnailName) {
-        this.thumbnailName = thumbnailName;
+    public void setThumbnailURL(String thumbnailURL) {
+        this.thumbnailURL = thumbnailURL;
     }
 
-    public void setTagline(String tagline) {
-        Tagline = tagline;
+
+    public static Bitmap DownloadImageBitmap(String url) {
+        Bitmap bm = null;
+        try {
+            URL aURL = new URL(url);
+            URLConnection conn = aURL.openConnection();
+            conn.connect();
+            InputStream is = conn.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(is);
+            bm = BitmapFactory.decodeStream(bis);
+            bis.close();
+            is.close();
+        } catch (IOException e) {
+            Log.e("IMAGE", "Error getting bitmap", e);
+        }
+        return bm;
     }
+
+
+
 }

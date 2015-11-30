@@ -20,9 +20,13 @@ public class ActivityFragmentContainer extends Activity {
 
     private static final String TAG = ActivityFragmentContainer.class.getSimpleName();
 
+    private String name = null;
+    private String facebookId = null;
+    private String photoURL = null;
+
     ImageButton ibUser;
 
-    //Delcaring two tabs and corresponding fragments
+    //Declaring two tabs and corresponding fragments
     Tab eventTab, trackTab;
     Fragment eventFragment = new EventFragment();
     Fragment trackFragment = new TrackFragment();
@@ -31,6 +35,13 @@ public class ActivityFragmentContainer extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Get User name, ID, photoURL from main activity
+        Bundle extras = getIntent().getExtras();
+        name = extras.getString("UserName");
+        facebookId = extras.getString("FacebookId");
+        photoURL = extras.getString("PhotoURL");
+
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_fragment_container);
 
@@ -55,6 +66,9 @@ public class ActivityFragmentContainer extends Activity {
                 //Goto activity Category
                 try {
                     Intent intent = new Intent(ActivityFragmentContainer.this, ActivityUserProfile.class);
+                    intent.putExtra("UserName", name);
+                    intent.putExtra("FacebookId", facebookId);
+                    intent.putExtra("PhotoURL", photoURL);
                     startActivity(intent);
                 } catch (Exception e) {
                     Log.e(TAG, e.toString());
