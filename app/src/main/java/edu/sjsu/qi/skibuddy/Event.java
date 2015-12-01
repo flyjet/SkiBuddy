@@ -51,19 +51,19 @@ public class Event extends ParseObject {
         put("author", user);
     }
 
-    public Date getStartTime(){
-        return getDate("StartTime");
+    public String getStartTime(){
+        return getString("StartTime");
     }
 
-    public void setStartTime(Date startTime){
+    public void setStartTime(String startTime){
         put("StartTime", startTime);
     }
 
-    public Date getEndTime(){
-        return getDate("EndTime");
+    public String getEndTime(){
+        return getString("EndTime");
     }
 
-    public void setEndTime(Date endTime){
+    public void setEndTime(String endTime){
         put("EndTime", endTime);
     }
 

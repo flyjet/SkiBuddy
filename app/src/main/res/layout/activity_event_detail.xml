@@ -39,6 +39,7 @@
                 android:layout_margin="5dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:textColor="#7b9eb2"
                 android:text="Event Title"/>
 
             <TextView
@@ -79,6 +80,7 @@
                 android:layout_margin="5dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:textColor="#7b9eb2"
                 android:text="Start"/>
 
             <TextView
@@ -101,6 +103,7 @@
                 android:layout_margin="5dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:textColor="#7b9eb2"
                 android:text="End"/>
 
             <TextView
@@ -140,6 +143,7 @@
                 android:layout_margin="5dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:textColor="#7b9eb2"
                 android:text="Event Description"/>
 
             <TextView
@@ -178,6 +182,7 @@
                 android:layout_margin="5dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:textColor="#7b9eb2"
                 android:text="People Join To the Event"/>
         </RelativeLayout>
 

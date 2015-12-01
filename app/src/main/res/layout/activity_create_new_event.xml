@@ -34,10 +34,12 @@
                 android:layout_toRightOf="@+id/imageView_title"
                 android:id="@+id/editText_title"
                 android:layout_centerVertical="true"
-                android:paddingTop="20dp"
+                android:paddingTop="10dp"
                 android:layout_margin="5dp"
                 android:textSize="15sp"
-                android:hint="Event Title" />
+                android:hint="Event Title"
+                android:textColorHint="#9ecbe5"
+                android:background="@android:color/transparent"/>
 
         </RelativeLayout>
 
@@ -64,7 +66,6 @@
                 android:id="@+id/textView_start"
                 android:paddingTop="10dp"
                 android:layout_margin="5dp"
-                android:paddingLeft="10dp"
                 android:textSize="15sp"
                 android:hint="Nov 30, 2015 at 11:00 am"
                 android:clickable="true"/>
@@ -77,7 +78,6 @@
                 android:layout_below="@+id/textView_start"
                 android:id="@+id/textView_end"
                 android:paddingTop="10dp"
-                android:paddingLeft="10dp"
                 android:layout_margin="5dp"
                 android:textSize="15sp"
                 android:hint="Dec 01, 2015 at 11:00 am"
@@ -106,10 +106,12 @@
                 android:inputType="textMultiLine"
                 android:id="@+id/editText_des"
                 android:layout_centerVertical="true"
-                android:paddingTop="20dp"
+                android:paddingTop="10dp"
                 android:layout_margin="5dp"
                 android:textSize="15sp"
-                android:hint="Event Description" />
+                android:hint="Event Description"
+                android:textColorHint="#9ecbe5"
+                android:background="@android:color/transparent"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -126,16 +128,18 @@
                 android:layout_margin="10dp"
                 android:src="@drawable/ic_invite" />
 
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/imageView_invite"
-                android:id="@+id/editText_invite"
+                android:id="@+id/textView_invite"
                 android:layout_centerVertical="true"
-                android:paddingTop="20dp"
+                android:paddingTop="10dp"
                 android:layout_margin="5dp"
                 android:textSize="15sp"
-                android:hint="Invite People" />
+                android:hint="Invite People"
+                android:clickable="true"
+                android:background="@android:color/transparent"/>
 
         </RelativeLayout>
 
