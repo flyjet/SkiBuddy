@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -38,6 +39,8 @@ public class MainActivity extends Activity {
     private Profile mFbProfile;
     private ParseUser parseUser;
 
+    private Button bt_test;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,21 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         mFbProfile = Profile.getCurrentProfile();
+
+        //The following code is for test button without login
+        bt_test = (Button)findViewById(R.id.bt_test);
+        bt_test.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ActivityFragmentContainer.class);
+                intent.putExtra("UserName", "Raymond N Sophia");
+                intent.putExtra("FacebookId", "844661355653516");
+                intent.putExtra("PhotoURL",
+                        "https://graph.facebook.com/844661355653516/picture?height=200&width=200&migration_overrides=%7Boctober_2012%3Atrue%7D");
+                startActivity(intent);
+            }
+        });
+
 
         bt_login_facebook = (ImageButton)findViewById(R.id.button_login_facebook);
 

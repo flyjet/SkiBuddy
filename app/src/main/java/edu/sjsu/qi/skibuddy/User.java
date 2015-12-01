@@ -14,7 +14,7 @@ import java.net.URLConnection;
 /**
  * Created by qi on 11/20/15.
  */
-public class ItemUser {
+public class User {
     private String userId;
     private String userName;
     private String thumbnailURL;

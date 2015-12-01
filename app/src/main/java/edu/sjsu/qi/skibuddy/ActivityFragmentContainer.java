@@ -42,6 +42,13 @@ public class ActivityFragmentContainer extends Activity {
         facebookId = extras.getString("FacebookId");
         photoURL = extras.getString("PhotoURL");
 
+        //put User Name and Id  to Event and Favorite fragment
+        Bundle bundle = new Bundle();
+        bundle.putString("UserName", name);
+        bundle.putString("FacebookId", facebookId);
+        eventFragment.setArguments(bundle);
+        trackFragment.setArguments(bundle);
+
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_fragment_container);
 

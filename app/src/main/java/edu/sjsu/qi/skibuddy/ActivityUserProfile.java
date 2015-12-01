@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -32,7 +31,7 @@ public class ActivityUserProfile extends Activity {
 
     ImageButton ibBack;
     Button btSignout;
-    ItemUser currentUser = new ItemUser();
+    User currentUser = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +64,9 @@ public class ActivityUserProfile extends Activity {
             public void onClick(View v) {
                 //Goto activity Category
                 try {
-                    Intent intent = new Intent(ActivityUserProfile.this, ActivityFragmentContainer.class);
-                    startActivity(intent);
+                    finish();
+                    //Intent intent = new Intent(ActivityUserProfile.this, ActivityFragmentContainer.class);
+                    //startActivity(intent);
                 } catch (Exception e) {
                     Log.e(TAG, e.toString());
                 }

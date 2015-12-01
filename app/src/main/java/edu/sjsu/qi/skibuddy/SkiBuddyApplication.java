@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseObject;
 
 /**
  * Created by qi on 11/28/15.
@@ -19,6 +20,11 @@ public class SkiBuddyApplication extends Application {
 
         //Enable local Datastore
         Parse.enableLocalDatastore(this);
+
+        //Subclass ParseObject to create and modify Event Objects
+        ParseObject.registerSubclass(Event.class);
+
+        //Fill in this section with Parse credentials
         Parse.initialize(this, applicationId, clienttKey);
 
         //Initialize ParseFacebookUtils

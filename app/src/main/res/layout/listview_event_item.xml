@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:background="#ffffff">
+
+    <TextView android:id="@+id/textView_eventTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:padding="4dp"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView android:id="@+id/textView_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:layout_below="@+id/textView_eventTitle"
+        android:textSize="12sp" />
+
+    <TextView android:id="@+id/textView_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:text=" To "
+        android:layout_below="@+id/textView_eventTitle"
+        android:layout_toRightOf="@+id/textView_start"
+        android:textSize="12sp"
+        android:textStyle="bold"/>
+
+    <TextView android:id="@+id/textView_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:layout_toRightOf="@+id/textView_to"
+        android:layout_below="@+id/textView_eventTitle"
+        android:textSize="12sp" />
+
+</RelativeLayout>

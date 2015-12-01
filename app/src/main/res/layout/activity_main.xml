@@ -57,13 +57,12 @@
             android:src="@drawable/login_facebook"
             android:scaleType="fitCenter"
             android:background="@null" />
-
     </RelativeLayout>
 
-
-
-
-
-
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Test without login"
+        android:id="@+id/bt_test"
+        android:layout_gravity="center_horizontal"/>
 </LinearLayout>

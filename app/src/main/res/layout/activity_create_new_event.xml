@@ -1,0 +1,145 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#e7f6ff"
+    tools:context="edu.sjsu.qi.skibuddy.ActivityCreateNewEvent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="#ffffff"
+            android:layout_marginTop="6dp">
+
+            <ImageView
+                android:id="@+id/imageView_title"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_event" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imageView_title"
+                android:id="@+id/editText_title"
+                android:layout_centerVertical="true"
+                android:paddingTop="20dp"
+                android:layout_margin="5dp"
+                android:textSize="15sp"
+                android:hint="Event Title" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#ffffff"
+            android:layout_marginTop="6dp">
+
+            <ImageView
+                android:id="@+id/imageView_time"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_time" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:layout_toRightOf="@+id/imageView_time"
+                android:id="@+id/textView_start"
+                android:paddingTop="10dp"
+                android:layout_margin="5dp"
+                android:paddingLeft="10dp"
+                android:textSize="15sp"
+                android:hint="Nov 30, 2015 at 11:00 am"
+                android:clickable="true"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imageView_time"
+                android:layout_below="@+id/textView_start"
+                android:id="@+id/textView_end"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:layout_margin="5dp"
+                android:textSize="15sp"
+                android:hint="Dec 01, 2015 at 11:00 am"
+                android:clickable="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="#ffffff"
+            android:layout_marginTop="6dp">
+
+            <ImageView
+                android:id="@+id/imageView_des"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_des" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imageView_des"
+                android:inputType="textMultiLine"
+                android:id="@+id/editText_des"
+                android:layout_centerVertical="true"
+                android:paddingTop="20dp"
+                android:layout_margin="5dp"
+                android:textSize="15sp"
+                android:hint="Event Description" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="#ffffff"
+            android:layout_marginTop="6dp">
+
+            <ImageView
+                android:id="@+id/imageView_invite"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_invite" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imageView_invite"
+                android:id="@+id/editText_invite"
+                android:layout_centerVertical="true"
+                android:paddingTop="20dp"
+                android:layout_margin="5dp"
+                android:textSize="15sp"
+                android:hint="Invite People" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

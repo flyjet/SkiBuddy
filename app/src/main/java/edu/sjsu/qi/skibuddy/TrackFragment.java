@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
 public class TrackFragment extends Fragment {
+
+    private String name = null;
+    private String facebookId = null;
 
     public TrackFragment() {
         // Required empty public constructor
@@ -18,6 +22,12 @@ public class TrackFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Get Current User Name and Id from ActivityFragmentContainer
+        name = getArguments().getString("UserName");
+        facebookId = getArguments().getString("FacebookId");
+
+
 
     }
 
