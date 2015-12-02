@@ -12,6 +12,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
 import java.util.Date;
 
 
@@ -20,6 +25,7 @@ public class ActivityCreateNewEvent extends Activity implements DatePickerFragme
     private static final String TAG = ActivityCreateNewEvent.class.getSimpleName();
 
     private Event event;
+    private ParseUser user;
 
     private DatePickerFragment myDatePickerDialogStart;
     private DatePickerFragment myDatePickerDialogEnd;
@@ -92,7 +98,7 @@ public class ActivityCreateNewEvent extends Activity implements DatePickerFragme
 
         // Set up the action bar
         ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
 
         //Show the custom ActionBar with the icon_back
         View mActionBarView = getLayoutInflater().inflate(R.layout.action_bar_cancel, null);
@@ -140,12 +146,46 @@ public class ActivityCreateNewEvent extends Activity implements DatePickerFragme
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        //when user clickes "Save", upload the event to Parse
         if (id == R.id.action_Save) {
 
-            //TODO: implement to save all input data to Parse
-            Toast.makeText(getApplicationContext(),
-                    " Save button clicked", Toast.LENGTH_LONG).show();
+            //Title can not be null
+            String title = etTitle.getText().toString();
+
+            if(title != null && !title.isEmpty()){
+
+                //Associate the event with the current user
+                event.setAuthor(ParseUser.getCurrentUser());
+
+                //add data to even object
+                event.setEventTitle(title);
+                event.setDescription(etDescription.getText().toString());
+                event.setStartTime(tvStart.getText().toString());
+                event.setEndTime(tvEnd.getText().toString());
+
+                //Save event and return
+                event.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            setResult(Activity.RESULT_OK);
+                            Toast.makeText(getApplicationContext(),
+                                    "Your new event created ", Toast.LENGTH_LONG).show();
+                            finish();
+
+                        } else {
+                            Log.d(TAG, "Test, failed");
+                            Toast.makeText(getApplicationContext(),
+                                    "Error saving: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+            }else {
+                Toast.makeText(getApplicationContext(),
+                        "Please input the event title", Toast.LENGTH_LONG).show();
+            }
+
             return true;
         }
         return super.onOptionsItemSelected(item);

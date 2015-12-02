@@ -150,7 +150,7 @@ public class MainActivity extends Activity {
             public void done(ParseException e) {
 
                 //after saved user details, go to ActivityFragmentContainer
-                Toast.makeText(MainActivity.this, "New user:" + name + " Signed up",
+                Toast.makeText(getApplicationContext(), "New user:" + name + " Signed up",
                         Toast.LENGTH_LONG).show();
                 try {
                     startActivityFragmentContainer();
@@ -171,8 +171,9 @@ public class MainActivity extends Activity {
         facebookId = parseUser.get("FacebookId").toString();
         photoURL = parseUser.get("PhotoURL").toString();
 
-        Toast.makeText(MainActivity.this, "Welcome back " + name,
+        Toast.makeText(getApplicationContext(), "Welcome back " + name,
                 Toast.LENGTH_LONG).show();
+
         try{
             startActivityFragmentContainer();
 

@@ -14,6 +14,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +35,7 @@ public class EventFragment extends Fragment {
     private List<Event> listEvents;
 
     private Button btCreate;
-
-
-
+    
     public EventFragment() {
         // Required empty public constructor
     }
@@ -55,17 +59,7 @@ public class EventFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_event, container, false);
         eventsFound = (ListView)view.findViewById(R.id.listView_event);
-
-        //TODO: need to query event list from Parse
-        // Hardcode for test event list view
-        for(int i = 0; i<7; i++){
-            Event event = new Event();
-            event.setEventId("000" + i);
-            event.setEventTitle("Test Event " + i + " for SkiBuddy");
-            listEvents.add(event);
-        }
-
-        updateEventsList();
+        queryEventListFromParse();
 
         //sets the OnItemClickListener of the ListView
         //so user can click on a event and get event details
@@ -73,11 +67,8 @@ public class EventFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
                 Intent intent = new Intent(getActivity(), ActivityEventDetail.class);
-
-                //Todo put Extra of eventID
-                intent.putExtra("Event_ID", listEvents.get(pos).getEventId());
+                intent.putExtra("Event_Title", listEvents.get(pos).getEventTitle());
                 startActivity(intent);
-
             }
         });
 
@@ -103,7 +94,6 @@ public class EventFragment extends Fragment {
     }
 
 
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -114,11 +104,47 @@ public class EventFragment extends Fragment {
         super.onDetach();
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        queryEventListFromParse();
+    }
+
+    //query Events for current user
+    private void queryEventListFromParse(){
+
+        //Create query for objects of type "Event"
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Event");
+        // Restrict to cases where the author is the current user.
+        //pass in a ParseUser and not String of that user
+
+        query.whereEqualTo("author", ParseUser.getCurrentUser());
+        query.orderByAscending("createAt");
+
+        // Run the query
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> eventList, ParseException e) {
+                if(e == null){
+                    // If there are results, update the list of event and notify the adapter
+                    listEvents.clear();
+                    for(ParseObject event : eventList){
+                        listEvents.add((Event)event);
+                    }
+
+                    updateEventsList();
+
+                }else{
+                    Log.d(TAG, "Event retrieval error: " + e.getMessage());
+                }
+            }
+        });
+    }
+
 
     //Use ArrayAdapter and pass it to ListView to display event results
     //In the getView method, inflate the listview_event_item.xml layout and update its view
     private void updateEventsList(){
-
         //create an ArrayAdapter
         ArrayAdapter<Event> adapter = new ArrayAdapter<Event>(getActivity().getApplicationContext(),
                 R.layout.listview_event_item, listEvents){
@@ -137,13 +163,8 @@ public class EventFragment extends Fragment {
                 Event event = listEvents.get(position);
 
                 tvTitle.setText(event.getEventTitle());
-
-                //TODO, need change the testing code
-
-                tvStart.setText("Nov 30, 2015 at 9:00 AM");
-                tvEnd.setText("Dec 02, 2015 at 9:00 PM");
-                //tvStart.setText(event.getStartTime().toString());
-                //tvEnd.setText(event.getEndTime().toString());
+                tvStart.setText(event.getStartTime());
+                tvEnd.setText(event.getEndTime());
 
                 return convertView;
             }
@@ -151,6 +172,14 @@ public class EventFragment extends Fragment {
 
         //Assign adapter to ListView
         eventsFound.setAdapter(adapter);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            // If a new event has been added, update the list of events
+            queryEventListFromParse();
+        }
     }
 
 }
