@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         mFbProfile = Profile.getCurrentProfile();
-
+        /*
         //The following code is for test button without login
         bt_test = (Button)findViewById(R.id.bt_test);
         bt_test.setOnClickListener(new View.OnClickListener(){
@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
                 });
             }
         });
-
+        */
 
         bt_login_facebook = (ImageButton)findViewById(R.id.button_login_facebook);
 
