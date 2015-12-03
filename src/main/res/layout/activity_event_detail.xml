@@ -1,0 +1,211 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#e7f6ff"
+    tools:context="edu.sjsu.qi.skibuddy.ActivityCreateNewEvent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="#ffffff"
+            android:layout_marginTop="6dp">
+
+            <ImageView
+                android:id="@+id/imageView_title"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_event" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imageView_title"
+                android:id="@+id/textView_title"
+                android:layout_alignParentTop="true"
+                android:paddingTop="6dp"
+                android:layout_margin="4dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#7b9eb2"
+                android:text="Event Title"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imageView_title"
+                android:layout_below="@+id/textView_title"
+                android:id="@+id/textView_titleContent"
+                android:paddingTop="2dp"
+                android:layout_margin="4dp"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#ffffff"
+            android:layout_marginTop="6dp">
+
+            <ImageView
+                android:id="@+id/imageView_time"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_time"
+                android:layout_centerVertical="true"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imageView_time"
+                android:id="@+id/textView_TitleStart"
+                android:layout_alignParentTop="true"
+                android:paddingTop="6dp"
+                android:layout_margin="4dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#7b9eb2"
+                android:text="Start"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/textView_TitleStart"
+                android:id="@+id/textView_StartTime"
+                android:paddingTop="7dp"
+                android:layout_margin="5dp"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imageView_time"
+                android:id="@+id/textView_TitleEnd"
+                android:layout_below="@id/textView_TitleStart"
+                android:paddingTop="6dp"
+                android:layout_margin="4dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#7b9eb2"
+                android:text="End"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/textView_TitleStart"
+                android:id="@+id/textView_EndTime"
+                android:layout_below="@id/textView_StartTime"
+                android:paddingTop="7dp"
+                android:layout_margin="4dp"
+                android:textSize="15sp"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="#ffffff"
+            android:layout_marginTop="6dp">
+
+            <ImageView
+                android:id="@+id/imageView_des"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_des"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imageView_des"
+                android:id="@+id/textView_titleDes"
+                android:layout_alignParentTop="true"
+                android:paddingTop="6dp"
+                android:layout_margin="4dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#7b9eb2"
+                android:text="Event Description"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imageView_des"
+                android:layout_below="@+id/textView_titleDes"
+                android:id="@+id/textView_DesContent"
+                android:paddingTop="2dp"
+                android:layout_margin="4dp"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="#ffffff"
+            android:layout_marginTop="6dp">
+
+            <ImageView
+                android:id="@+id/imageView_invite"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_invite" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imageView_invite"
+                android:id="@+id/textView_titlePeople"
+                android:layout_alignParentTop="true"
+                android:paddingTop="6dp"
+                android:layout_margin="5dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#7b9eb2"
+                android:text="People Join To the Event"/>
+        </RelativeLayout>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="6sp"
+            android:id="@+id/listView_user">
+        </ListView>
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:id="@+id/button_map"
+            android:layout_gravity="right|bottom"
+            android:scaleType="fitXY"
+            android:background="@drawable/ic_map" />
+    </LinearLayout>
+
+
+
+
+</ScrollView>
