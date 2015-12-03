@@ -16,6 +16,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:padding="5dp"
         android:layout_weight="2">
 
@@ -44,7 +45,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="-60dp"
+        android:layout_marginTop="-30dp"
         android:layout_marginBottom="50dp"
         android:layout_marginRight="60dp"
         android:layout_marginLeft="60dp"
@@ -59,10 +60,4 @@
             android:background="@null" />
     </RelativeLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="Test without login"
-        android:id="@+id/bt_test"
-        android:layout_gravity="center_horizontal"/>
 </LinearLayout>

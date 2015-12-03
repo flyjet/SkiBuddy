@@ -3,6 +3,7 @@ package edu.sjsu.qi.skibuddy;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -140,19 +141,21 @@ public class ActivityEventDetail extends Activity {
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> eventList, ParseException e) {
-                if(e == null){
+                if (e == null) {
                     //get event details
                     event = new Event();
-                    event = (Event)eventList.get(0);
+                    event = (Event) eventList.get(0);
+                    //eventList size is right
 
                     listUsers = new ArrayList<ParseUser>();
                     listUsers.clear();
-                    for(ParseObject event : eventList){
-                        listUsers.add(((Event)event).getAuthor());
+                    for (ParseObject event : eventList) {
+                        listUsers.add(((Event) event).getAuthor());
                     }
+                    //listUsers size is right
                     updateEventsDetail();
 
-                }else{
+                } else {
                     Log.d(TAG, "Event retrieval error: " + e.getMessage());
                 }
             }
@@ -167,54 +170,104 @@ public class ActivityEventDetail extends Activity {
         tvDes.setText(event.getDescription());
 
         //create an ArrayAdapter
-        ArrayAdapter<ParseUser> adapter = new ArrayAdapter<ParseUser>(getApplicationContext(),
+        final ArrayAdapter<ParseUser> adapter = new ArrayAdapter<ParseUser>(getApplicationContext(),
                 R.layout.listview_user_item, listUsers){
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent){
 
+                ViewHolder holder = new ViewHolder();
+
                 if(convertView == null){
                     convertView = getLayoutInflater().inflate(R.layout.listview_user_item, parent, false);
                 }
                 image = (ImageView)convertView.findViewById(R.id.user_thumbnail);
+                image.setTag(listUsers.get(position));
                 tvName = (TextView)convertView.findViewById(R.id.user_name);
                 user = listUsers.get(position);
-                updateUserProfile();
+
+                holder.position = position;
+                Log.d(TAG, "==== position " + position);
+
+                //Set TextView for name
+                String name = "";
+                try {
+                    name = user.fetchIfNeeded().getString("username");
+                } catch (ParseException e) {
+                    Log.e(TAG, e.toString());
+                }
+                tvName.setText(name);
+
+                String url ="";
+                try {
+                    url = user.fetchIfNeeded().getString("PhotoURL");
+                } catch (ParseException e) {
+                    Log.e(TAG, e.toString());
+                }
+                holder.url =url;
+                holder.image = image;
+
+                //Set ImageView
+                new  DownloadPhotoAsync(position, holder).execute();
                 return convertView;
             }
         };
+
         //Assign adapter to ListView
         lvUsersFound.setAdapter(adapter);
 
     }
 
-    private void updateUserProfile(){
-        //AsyncTask to download user photo
-        DownloadPhotoAsync photoAsync = new DownloadPhotoAsync();
-        photoAsync.execute();
-    }
-
     //New class called ProfilePhotoAsync and make it extend AsyncTask
     //Download profile photo from giving URL.
-    class DownloadPhotoAsync extends AsyncTask<String, String, String> {
+    class DownloadPhotoAsync extends AsyncTask <Object, String, Bitmap> {
+
+        private int myPosition;
+        private ViewHolder myHolder;
+        private ImageView myImage;
+        private String path;
+
         public Bitmap bitmap;
         public User myUser = new User();
+        public DownloadPhotoAsync(int position, ViewHolder holder){
+            myHolder = holder;
+            myPosition = position;
+            this.path = image.getTag().toString();
+        }
+
         @Override
-        protected String doInBackground(String... params) {
+        protected Bitmap doInBackground(Object... args) {
             // Fetching data from URI and storing in bitmap
-            bitmap = myUser.DownloadImageBitmap(user.get("PhotoURL").toString());
-            Log.d(TAG, "IMAGE finished download giving URL");
-            return null;
+
+
+            //TODO: some bug here, image download many times
+
+            bitmap = myUser.DownloadImageBitmap(myHolder.url);
+            Log.d(TAG, "IMAGE finished download giving URL" + myHolder);
+            return  bitmap;
         }
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            tvName.setText(user.getUsername());
-            image.setImageBitmap(bitmap);
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+
+          //TODO: have bug here, repeatly show last user photo
+          //The following if does not work
+          //if (!image.getTag().toString().equals(path)) {
+               /* The path is not same. This means that this
+                  image view is handled by some other async task.
+                  We don't do anything and return. */
+           //   return;
+          //}
+            if(myHolder.position == myPosition){
+                myHolder.image.setImageBitmap(bitmap);
+            }
         }
     }
 
-
-
+    private class ViewHolder{
+        public ImageView image;
+        public String url;
+        public int position;
+    }
 
 }
