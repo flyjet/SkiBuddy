@@ -93,6 +93,7 @@ public class ActivityEventDetail extends Activity {
                 try {
                     Intent intent = new Intent(ActivityEventDetail.this, ActivityShowEventUsersMap.class);
                     //TODO: put extra for Event Title
+                    intent.putExtra("Event_Title", eventTitle);
                     startActivity(intent);
 
                 } catch (Exception e) {

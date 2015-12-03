@@ -143,6 +143,27 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="#ffffff"
+            android:layout_marginTop="6dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_invite_input"
+                android:layout_centerVertical="true"
+                android:paddingTop="10dp"
+                android:layout_margin="5dp"
+                android:textSize="15sp"
+                android:hint="Input name here,then press invite people"
+                android:clickable="true"
+                android:background="@android:color/transparent"/>
+
+        </RelativeLayout>
+
     </LinearLayout>
 
 
