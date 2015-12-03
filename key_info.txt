@@ -1,0 +1,5 @@
+When generate signed apk, 
+key path is the pwd of key
+key store password is xls110110
+key alias is xls110110
+key password is xls110110
