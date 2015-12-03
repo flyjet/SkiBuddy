@@ -3,6 +3,7 @@ package edu.sjsu.qi.skibuddy;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -175,6 +176,8 @@ public class ActivityEventDetail extends Activity {
             @Override
             public View getView(int position, View convertView, ViewGroup parent){
 
+                ViewHolder holder = new ViewHolder();
+
                 if(convertView == null){
                     convertView = getLayoutInflater().inflate(R.layout.listview_user_item, parent, false);
                 }
@@ -183,6 +186,7 @@ public class ActivityEventDetail extends Activity {
                 tvName = (TextView)convertView.findViewById(R.id.user_name);
                 user = listUsers.get(position);
 
+                holder.position = position;
                 Log.d(TAG, "==== position " + position);
 
                 //Set TextView for name
@@ -194,8 +198,17 @@ public class ActivityEventDetail extends Activity {
                 }
                 tvName.setText(name);
 
+                String url ="";
+                try {
+                    url = user.fetchIfNeeded().getString("PhotoURL");
+                } catch (ParseException e) {
+                    Log.e(TAG, e.toString());
+                }
+                holder.url =url;
+                holder.image = image;
+
                 //Set ImageView
-                new  DownloadPhotoAsync(image).execute();
+                new  DownloadPhotoAsync(position, holder).execute();
                 return convertView;
             }
         };
@@ -207,36 +220,31 @@ public class ActivityEventDetail extends Activity {
 
     //New class called ProfilePhotoAsync and make it extend AsyncTask
     //Download profile photo from giving URL.
-    class DownloadPhotoAsync extends AsyncTask<Object, String, Bitmap> {
+    class DownloadPhotoAsync extends AsyncTask <Object, String, Bitmap> {
 
-        public ImageView image;
+        private int myPosition;
+        private ViewHolder myHolder;
+        private ImageView myImage;
         private String path;
 
         public Bitmap bitmap;
         public User myUser = new User();
-        public DownloadPhotoAsync(ImageView image){
-            this.image = image;
+        public DownloadPhotoAsync(int position, ViewHolder holder){
+            myHolder = holder;
+            myPosition = position;
             this.path = image.getTag().toString();
         }
 
         @Override
-        protected Bitmap doInBackground(Object... params) {
+        protected Bitmap doInBackground(Object... args) {
             // Fetching data from URI and storing in bitmap
 
-            //Get user photo URL
-            String url ="";
-            try {
-                url = user.fetchIfNeeded().getString("PhotoURL");
-            } catch (ParseException e) {
-                Log.e(TAG, e.toString());
-            }
 
             //TODO: some bug here, image download many times
 
-            bitmap = myUser.DownloadImageBitmap(url);
-            Log.d(TAG, "IMAGE finished download giving URL" + url);
-
-            return bitmap;
+            bitmap = myUser.DownloadImageBitmap(myHolder.url);
+            Log.d(TAG, "IMAGE finished download giving URL" + myHolder);
+            return  bitmap;
         }
         @Override
         protected void onPostExecute(Bitmap bitmap) {
@@ -250,8 +258,16 @@ public class ActivityEventDetail extends Activity {
                   We don't do anything and return. */
            //   return;
           //}
-            image.setImageBitmap(bitmap);
+            if(myHolder.position == myPosition){
+                myHolder.image.setImageBitmap(bitmap);
+            }
         }
+    }
+
+    private class ViewHolder{
+        public ImageView image;
+        public String url;
+        public int position;
     }
 
 }
