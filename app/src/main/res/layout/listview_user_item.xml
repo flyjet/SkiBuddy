@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/user_thumbnail"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_margin="10dp" />
 
     <TextView android:id="@+id/user_name"

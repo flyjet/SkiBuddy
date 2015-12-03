@@ -1,4 +1,4 @@
-<ScrollView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#e7f6ff"
@@ -195,17 +195,16 @@
             android:id="@+id/listView_user">
         </ListView>
 
-        <Button
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_margin="10dp"
-            android:id="@+id/button_map"
-            android:layout_gravity="right|bottom"
-            android:scaleType="fitXY"
-            android:background="@drawable/ic_map" />
     </LinearLayout>
 
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:id="@+id/button_map"
+        android:layout_gravity="right|bottom"
+        android:scaleType="fitXY"
+        android:background="@drawable/ic_map" />
 
 
-
-</ScrollView>
+</FrameLayout>
