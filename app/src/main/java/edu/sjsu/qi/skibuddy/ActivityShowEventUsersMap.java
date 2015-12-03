@@ -350,6 +350,15 @@ public class ActivityShowEventUsersMap extends FragmentActivity implements Locat
             public void done(ParseObject position, ParseException e) {
                 if (e == null) {
                     // update position
+  
+                    Location myLoc = (currentLocation == null) ? lastLocation : currentLocation;
+                    if (myLoc == null) {
+                        Toast.makeText(ActivityShowEventUsersMap.this,
+                                "Please wait your location appears on the map.", Toast.LENGTH_LONG).show();
+                        while(myLoc == null)
+                            myLoc = (currentLocation == null) ? lastLocation : currentLocation;
+                    }
+                    geoPoint = new ParseGeoPoint(myLoc.getLatitude(), myLoc.getLongitude());
                     position.put("location", geoPoint);
                     position.saveInBackground(new SaveCallback() {
                         @Override
