@@ -49,6 +49,32 @@ public class MainActivity extends Activity {
 
         mFbProfile = Profile.getCurrentProfile();
 
+        //The following code is for test button without login
+        bt_test = (Button)findViewById(R.id.bt_test);
+        bt_test.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Just click");
+                ParseUser.logInInBackground("lingqian", "test", new LogInCallback() {
+                    @Override
+                    public void done(ParseUser user, ParseException e) {
+
+                        if (e == null) {
+                            Intent intent = new Intent(MainActivity.this, ActivityFragmentContainer.class);
+                            intent.putExtra("UserName", "Raymond N Sophia");
+                            intent.putExtra("FacebookId", "844661355653516");
+                            intent.putExtra("PhotoURL",
+                                    "https://graph.facebook.com/844661355653516/picture?height=200&width=200&migration_overrides=%7Boctober_2012%3Atrue%7D");
+                            startActivity(intent);
+                        } else {
+                            Log.d(TAG, "error login");
+                        }
+                    }
+                });
+            }
+        });
+
+
         bt_login_facebook = (ImageButton)findViewById(R.id.button_login_facebook);
 
         //Action of Facebook Login Button
