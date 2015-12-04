@@ -20,6 +20,7 @@ import com.parse.SaveCallback;
 import java.util.Date;
 
 
+
 public class ActivityCreateNewEvent extends Activity implements DatePickerFragment.UpdateDateTimeListener {
 
     private static final String TAG = ActivityCreateNewEvent.class.getSimpleName();
@@ -32,7 +33,7 @@ public class ActivityCreateNewEvent extends Activity implements DatePickerFragme
 
     private DatePicker datePicker;
     private ImageButton ibCancel;
-    private EditText etTitle, etDescription;
+    private EditText etTitle, etDescription,tvInviteText;
     private TextView tvStart, tvEnd,tvInvite;
     private Date currentDate;
 
@@ -58,6 +59,7 @@ public class ActivityCreateNewEvent extends Activity implements DatePickerFragme
         etTitle = (EditText)findViewById(R.id.editText_title);
         etDescription = (EditText)findViewById(R.id.editText_des);
         tvInvite = (TextView)findViewById(R.id.textView_invite);
+        tvInviteText = (EditText)findViewById(R.id.textView_invite_input);
         tvStart = (TextView)findViewById(R.id.textView_start);
         tvEnd = (TextView)findViewById(R.id.textView_end);
 
@@ -95,6 +97,19 @@ public class ActivityCreateNewEvent extends Activity implements DatePickerFragme
         });
 
         //TODO, implement to invite people
+        tvInvite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Bundle args = new Bundle();
+                    args.putString("Type", "End  ");
+                    myDatePickerDialogEnd.setArguments(args);
+                    myDatePickerDialogEnd.show(getFragmentManager(), "End");
+                } catch (Exception e) {
+                    Log.e(TAG, e.toString());
+                }
+            }
+        });
 
         // Set up the action bar
         ActionBar actionBar = getActionBar();
