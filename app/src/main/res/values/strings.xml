@@ -8,7 +8,7 @@
     <string name="title_activity_create_new_event">Create New Event</string>
     <string name="title_activity_event_detail">Event Detail</string>
     <string name="title_activity_show_event_users_map">Show Event Users</string>
-
+    <string name="title_activity_track">Event Track</string>
 
     <string name="facebook_app_id">901634563266189</string>
 

@@ -2,8 +2,26 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context="edu.sjsu.qi.skibuddy.TrackFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="Hello from track fragment" />
+    <!-- TODO: Update event list -->
+    <TextView android:layout_width="match_parent" android:layout_height="59dp"
+        android:text="Select an event, then click button to track"
+        android:layout_marginTop="20dp"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:id="@+id/button_Start"
+        android:layout_gravity="right|bottom"
+        android:scaleType="fitXY"
+        android:background="@drawable/ic_track" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:layout_gravity="center"></LinearLayout>
 
 </FrameLayout>
