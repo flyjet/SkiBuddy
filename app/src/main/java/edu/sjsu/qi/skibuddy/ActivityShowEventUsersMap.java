@@ -2,7 +2,6 @@ package edu.sjsu.qi.skibuddy;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
@@ -350,7 +349,6 @@ public class ActivityShowEventUsersMap extends FragmentActivity implements Locat
             public void done(ParseObject position, ParseException e) {
                 if (e == null) {
                     // update position
-  
                     Location myLoc = (currentLocation == null) ? lastLocation : currentLocation;
                     if (myLoc == null) {
                         Toast.makeText(ActivityShowEventUsersMap.this,
@@ -523,14 +521,6 @@ public class ActivityShowEventUsersMap extends FragmentActivity implements Locat
         startPeriodicUpdates();
     }
 
-    /*
-     * Called by Location Services if the connection to the location client drops because of an error.
-     */
-    public void onDisconnected() {
-
-        Log.d(TAG, "Disconnected from location services");
-    }
-
     @Override
     public void onConnectionSuspended(int i) {
         Log.i(TAG, "GoogleApiClient connection has been suspend");
@@ -577,7 +567,7 @@ public class ActivityShowEventUsersMap extends FragmentActivity implements Locat
         // The return offset, initialized to the default difference
         double latLngOffset = OFFSET_CALCULATION_INIT_DIFF;
         // Set up the desired offset distance in meters
-        float desiredOffsetInMeters = 250.0f * METERS_PER_FEET;
+        float desiredOffsetInMeters = 2500.0f * METERS_PER_FEET;
         // Variables for the distance calculation
         float[] distance = new float[1];
         boolean foundMax = false;

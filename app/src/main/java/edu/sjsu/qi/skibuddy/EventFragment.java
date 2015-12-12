@@ -32,7 +32,7 @@ public class EventFragment extends Fragment {
 
     private String name = null;
     private String facebookId = null;
-    private List<Event> listEvents;
+    private List<Event> listEvents=new ArrayList<>();
 
     private Button btCreate;
     
@@ -49,8 +49,6 @@ public class EventFragment extends Fragment {
         facebookId = getArguments().getString("FacebookId");
         Log.d(TAG, "User Name: " + name + " from EventFragment");
         Log.d(TAG, "User Id: " + facebookId + " from EventFragment");
-
-        listEvents = new ArrayList<Event>();
     }
 
     @Override

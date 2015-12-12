@@ -2,6 +2,7 @@ package edu.sjsu.qi.skibuddy;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -59,7 +60,6 @@ public class ActivityCreateNewEvent extends Activity implements DatePickerFragme
         etTitle = (EditText)findViewById(R.id.editText_title);
         etDescription = (EditText)findViewById(R.id.editText_des);
         tvInvite = (TextView)findViewById(R.id.textView_invite);
-        tvInviteText = (EditText)findViewById(R.id.textView_invite_input);
         tvStart = (TextView)findViewById(R.id.textView_start);
         tvEnd = (TextView)findViewById(R.id.textView_end);
 
@@ -97,18 +97,27 @@ public class ActivityCreateNewEvent extends Activity implements DatePickerFragme
         });
 
         //TODO, implement to invite people
-        tvInvite.setOnClickListener(new View.OnClickListener() {
+        tvInvite.setOnClickListener(new View.OnClickListener(){
+
             @Override
-            public void onClick(View v) {
+            public void onClick (View v){
                 try {
-                    Bundle args = new Bundle();
-                    args.putString("Type", "End  ");
-                    myDatePickerDialogEnd.setArguments(args);
-                    myDatePickerDialogEnd.show(getFragmentManager(), "End");
-                } catch (Exception e) {
-                    Log.e(TAG, e.toString());
+                    Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Try SkiBuddy for Android!");
+                    shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, "I'm using SkiBuddy for Android " +
+                            "and I recommend it. Click here to join me: " +
+                            " https://fb.me/903588116404167");
+
+                    Intent chooserIntent = Intent.createChooser(shareIntent, "Share with");
+                    chooserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(chooserIntent);
+                }
+                catch (Exception e){
+
                 }
             }
+
         });
 
         // Set up the action bar
