@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -99,15 +100,17 @@ public class ActivityEventDetail extends Activity {
             }
         });
 
-        /*
+
         //sets the OnItemClickListener of the ListView of users
-        //so user can click on a user and get user details
+        //so user can click on a user and get user records list
         lvUsersFound.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
-                //may need start new activity
+                Intent intent = new Intent(ActivityEventDetail.this, ActivityTrackContainer.class);
+                intent.putExtra("UserName", listUsers.get(pos).getUsername());
+                startActivity(intent);
             }
-        }); */
+        });
 
     }
 

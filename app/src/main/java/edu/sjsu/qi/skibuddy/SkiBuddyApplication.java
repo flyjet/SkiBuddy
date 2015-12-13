@@ -23,6 +23,7 @@ public class SkiBuddyApplication extends Application {
 
         //Subclass ParseObject to create and modify Event Objects
         ParseObject.registerSubclass(Event.class);
+        ParseObject.registerSubclass(Track.class);
 
         ParseObject.registerSubclass(Skiposition.class);
         //Fill in this section with Parse credentials
